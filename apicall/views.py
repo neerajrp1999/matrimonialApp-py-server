@@ -11,8 +11,5 @@ def n_sender(request):
     tokens1="c4bDYJueQPqVsFURrNwNZz:APA91bFZESpXtF3nk4O632HkJ2fTMFqlllrj6Jri1_3zWmeUMvKJxhEE_Rnxft1TbAwdyf8fBZtgJeID_x32UY6pExbOEh79FpwPlLCCrEzbMduTDZO91fIuaaNd1l8Scd-zWMHPAFyR"
     titleS=request.GET.get('titleS',None)
     messageS=request.GET.get('messageS',None)
-    data={
-        'title':request.GET.get('titleS',None)
-    }
-    fcm.sendPush(titleS, messageS, [str(tokens1)],data)
-    return JsonResponse({"jj":tokens,"ss":titleS,"ff":messageS})
+    response=fcm.sendPush(titleS, messageS, [str(tokens1)])
+    return JsonResponse({response})
