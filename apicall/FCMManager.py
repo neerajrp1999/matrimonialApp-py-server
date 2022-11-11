@@ -28,7 +28,7 @@ def sendPush(title, msg, registration_token, dataObject=None):
     )
     
     response = messaging.send_multicast(message)
-    print('Successfully sent message:', response)
+    return response
 
 
 def send_to_token():
