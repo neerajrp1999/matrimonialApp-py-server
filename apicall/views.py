@@ -14,5 +14,5 @@ def n_sender(request):
     data={
         'title':request.GET.get('titleS',None)
     }
-    fcm.sendPush(titleS, messageS, [str(tokens)],data)
+    fcm.sendPush(titleS, messageS, [str(tokens1)],data)
     return JsonResponse({"jj":tokens,"ss":titleS,"ff":messageS})
