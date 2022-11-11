@@ -1,3 +1,5 @@
 firebase_admin
 django
 djangorestframework
+whitenoise
+gunicorn
