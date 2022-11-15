@@ -3,7 +3,6 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from . import FCMManager as fcm
-from . import firebase_db_get as fdg
 
 @api_view(['GET', 'POST'])
 def datas(request):
