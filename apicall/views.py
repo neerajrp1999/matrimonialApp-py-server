@@ -3,6 +3,12 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from . import FCMManager as fcm
+from . import firebase_db_get as fdg
+
+@api_view(['GET', 'POST'])
+def datas(request):
+    fcm.datafetch()
+    #fdg.call()
 
 @api_view(['GET', 'POST'])
 def n_sender(request):
@@ -11,6 +17,12 @@ def n_sender(request):
     #tokens1="c4bDYJueQPqVsFURrNwNZz:APA91bFZESpXtF3nk4O632HkJ2fTMFqlllrj6Jri1_3zWmeUMvKJxhEE_Rnxft1TbAwdyf8fBZtgJeID_x32UY6pExbOEh79FpwPlLCCrEzbMduTDZO91fIuaaNd1l8Scd-zWMHPAFyR"
     titleS=request.GET.get('titleS',None)
     messageS=request.GET.get('messageS',None)
+    data=str(messageS).split("__@__")
+    urlString=fcm.dataUrl(data[1])
+    data={
+        'URL': urlString,
+        'tabNo': data[2],
+        }
     response=fcm.sendPush(titleS, messageS, [str(tokens)])
     
     return JsonResponse({"Response":"Done"})

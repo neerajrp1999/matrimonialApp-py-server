@@ -3,3 +3,4 @@ django
 djangorestframework
 whitenoise
 gunicorn
+google-cloud

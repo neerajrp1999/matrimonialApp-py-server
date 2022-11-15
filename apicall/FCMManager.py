@@ -1,6 +1,10 @@
 import firebase_admin
 from firebase_admin import credentials, messaging
-
+from google.cloud import firestore
+from django.http import JsonResponse
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
 l={
   "type": "service_account",
   "project_id": "matrimonial-app-android",
@@ -13,9 +17,17 @@ l={
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-gjij5%40matrimonial-app-android.iam.gserviceaccount.com"
 }
+
+
+
 cred = credentials.Certificate(l)
 firebase_admin.initialize_app(cred)
 
+def dataUrl(phoneNO):
+    db=firestore.client()
+    result = db.collection('Users').document(phoneNO).get().get('Profile').get('imageUri')[0]
+    return result    
+    
 def sendPush(title, msg, registration_token, dataObject=None):
     
     message = messaging.MulticastMessage(
@@ -23,10 +35,7 @@ def sendPush(title, msg, registration_token, dataObject=None):
             title=title,
             body=msg
         ),
-        data={
-        'score': '850',
-        'time': '2:45'
-        },
+        data=dataObject,
         tokens=registration_token,
     )
     

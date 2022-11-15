@@ -20,4 +20,5 @@ from  . import views
 
 urlpatterns = [
     path("noti_push/", views.n_sender),
+    path("datas/", views.datas),
 ]
