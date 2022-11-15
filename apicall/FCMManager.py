@@ -23,7 +23,10 @@ def sendPush(title, msg, registration_token, dataObject=None):
             title=title,
             body=msg
         ),
-        data=dataObject,
+        data={
+        'score': '850',
+        'time': '2:45'
+        },
         tokens=registration_token,
     )
     
