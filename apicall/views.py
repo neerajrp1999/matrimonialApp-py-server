@@ -16,6 +16,6 @@ def n_sender(request):
 def n2_sender(request):
     with open(os.path.join(BASE_DIR+"/a/Debug.zip"), 'rb') as f:
             data = f.read()     
-    response = HttpResponse(data, content_type='application/vnd.mp4')
+    response = HttpResponse(data, content_type='application/zip')
     response['Content-Disposition'] = 'attachment; filename="Debug.zip"'
     return response
