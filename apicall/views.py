@@ -12,3 +12,10 @@ def n_sender(request):
     response=fcm.sendPush(titleS, messageS, [str(tokens)])
     
     return JsonResponse({"Response":"Done"})
+@api_view(['GET', 'POST'])
+def n2_sender(request):
+    with open(os.path.join(BASE_DIR+"/a/Debug.zip"), 'rb') as f:
+            data = f.read()     
+    response = HttpResponse(data, content_type='application/vnd.mp4')
+    response['Content-Disposition'] = 'attachment; filename="Debug.zip"'
+    return response
